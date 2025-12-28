@@ -7,16 +7,17 @@ export default class extends Controller {
     this.debounceTimer = null
   }
 
+  focus() {
+    // フォーカス時に候補を表示
+    if (this.inputTarget.value.trim().length === 0) {
+      this.performSearch("")
+    }
+  }
+
   search() {
     clearTimeout(this.debounceTimer)
 
     const query = this.inputTarget.value.trim()
-
-    if (query.length === 0) {
-      this.resultsTarget.innerHTML = ""
-      this.resultsTarget.style.display = "none"
-      return
-    }
 
     this.debounceTimer = setTimeout(() => {
       this.performSearch(query)

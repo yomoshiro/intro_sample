@@ -39,10 +39,11 @@ class QuizzesController < ApplicationController
     query = params[:q]
 
     if query.present?
-      songs = Song.where("title LIKE ?", "%#{query}%").limit(10)
-      render json: songs.map { |s| { id: s.id, title: s.title } }
+      songs = Song.where("title LIKE ?", "%#{query}%").limit(5)
     else
-      render json: []
+      songs = Song.order("RANDOM()").limit(5)
     end
+
+    render json: songs.map { |s| { id: s.id, title: s.title } }
   end
 end
