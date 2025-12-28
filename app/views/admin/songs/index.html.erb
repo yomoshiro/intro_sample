@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="admin-screen">
+    <h1 class="title">曲管理</h1>
+
+    <div class="admin-actions">
+      <%= link_to "新しい曲を追加", new_admin_song_path, class: "btn btn-primary" %>
+    </div>
+
+    <% if notice %>
+      <div class="notice"><%= notice %></div>
+    <% end %>
+
+    <div class="songs-table">
+      <table>
+        <thead>
+          <tr>
+            <th>曲名</th>
+            <th>アーティスト</th>
+            <th>歌詞</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @songs.each do |song| %>
+            <tr>
+              <td><%= song.title %></td>
+              <td><%= song.artist %></td>
+              <td class="lyrics-preview"><%= truncate(song.lyrics, length: 50) %></td>
+              <td class="actions">
+                <%= link_to "編集", edit_admin_song_path(song), class: "btn btn-small" %>
+                <%= button_to "削除", admin_song_path(song), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-small btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+
+          <% if @songs.empty? %>
+            <tr>
+              <td colspan="4" class="no-records">曲がまだ登録されていません</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

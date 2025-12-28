@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="title-screen">
+    <h1 class="title">ボカロイントロクイズ</h1>
+    <p class="subtitle">歌い出しから曲名を当てよう！</p>
+
+    <%= form_with url: start_path, method: :post, local: true, class: "start-form" do |f| %>
+      <div class="form-group">
+        <%= f.label :player_name, "プレイヤー名", class: "form-label" %>
+        <%= f.text_field :player_name, required: true, placeholder: "名前を入力してください", class: "form-input" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "スタート", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="links">
+      <%= link_to "ランキングを見る", rankings_path, class: "link" %>
+    </div>
+  </div>
+</div>

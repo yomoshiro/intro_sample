@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="admin-screen">
+    <h1 class="title">曲を編集</h1>
+
+    <%= render "form", song: @song %>
+
+    <div class="action-buttons">
+      <%= link_to "戻る", admin_songs_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

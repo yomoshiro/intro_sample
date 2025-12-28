@@ -1,0 +1,31 @@
+<%= form_with(model: [:admin, song], local: true, class: "song-form") do |f| %>
+  <% if song.errors.any? %>
+    <div class="errors">
+      <h3><%= pluralize(song.errors.count, "エラー") %>が発生しました:</h3>
+      <ul>
+        <% song.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, "曲名", class: "form-label" %>
+    <%= f.text_field :title, class: "form-input", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :artist, "アーティスト", class: "form-label" %>
+    <%= f.text_field :artist, class: "form-input", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :lyrics, "歌詞（ひらがな）", class: "form-label" %>
+    <%= f.text_area :lyrics, rows: 5, class: "form-textarea", required: true, placeholder: "歌い出しの歌詞をひらがなで入力してください" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit song.new_record? ? "追加" : "更新", class: "btn btn-primary" %>
+  </div>
+<% end %>

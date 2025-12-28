@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="ranking-screen">
+    <h1 class="title">ランキング</h1>
+
+    <div class="ranking-table">
+      <table>
+        <thead>
+          <tr>
+            <th>順位</th>
+            <th>プレイヤー名</th>
+            <th>スコア</th>
+            <th>プレイ日時</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @game_records.each_with_index do |record, index| %>
+            <tr>
+              <td class="rank"><%= index + 1 %></td>
+              <td class="player"><%= record.player_name %></td>
+              <td class="score"><%= record.score %>問</td>
+              <td class="date"><%= record.played_at.strftime("%Y/%m/%d %H:%M") %></td>
+            </tr>
+          <% end %>
+
+          <% if @game_records.empty? %>
+            <tr>
+              <td colspan="4" class="no-records">まだ記録がありません</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="action-buttons">
+      <%= link_to "トップに戻る", root_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

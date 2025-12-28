@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="result-screen">
+    <h1 class="title">ゲーム終了！</h1>
+
+    <div class="result-info">
+      <p class="player-name"><%= @player_name %> さん</p>
+      <p class="final-score">
+        <span class="label">スコア:</span>
+        <span class="score"><%= @score %></span>
+        <span class="unit">問</span>
+      </p>
+    </div>
+
+    <div class="result-message">
+      <% if @score >= 10 %>
+        <p>素晴らしい！ボカロマスターですね！</p>
+      <% elsif @score >= 5 %>
+        <p>よくできました！</p>
+      <% else %>
+        <p>もっと頑張りましょう！</p>
+      <% end %>
+    </div>
+
+    <div class="action-buttons">
+      <%= link_to "もう一度プレイ", root_path, class: "btn btn-primary" %>
+      <%= link_to "ランキングを見る", rankings_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

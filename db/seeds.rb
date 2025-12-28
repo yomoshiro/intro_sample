@@ -1,9 +1,46 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# サンプルデータの作成
+
+Song.create!([
+  {
+    title: "千本桜",
+    artist: "黒うさP feat. 初音ミク",
+    lyrics: "だいたんふてきにはいからかくめいれいせんじだいにぎゃくもどりいちにさんしでれっつごー"
+  },
+  {
+    title: "ロストワンの号哭",
+    artist: "Neru feat. 鏡音リン",
+    lyrics: "まにあわせのきみだったひとりよがりのこえだった"
+  },
+  {
+    title: "砂の惑星",
+    artist: "ハチ feat. 初音ミク",
+    lyrics: "さようならあんちよりもっとうたってほしいんだろう"
+  },
+  {
+    title: "メルト",
+    artist: "ryo feat. 初音ミク",
+    lyrics: "こんなきもちめると"
+  },
+  {
+    title: "恋愛裁判",
+    artist: "40mP feat. 初音ミク",
+    lyrics: "こいするきもちわかりますかおこたえください"
+  },
+  {
+    title: "ワールドイズマイン",
+    artist: "ryo feat. 初音ミク",
+    lyrics: "せかいでいちばんおひめさまそういうあつかいこころえてよね"
+  },
+  {
+    title: "Tell Your World",
+    artist: "kz feat. 初音ミク",
+    lyrics: "ひとりきりでみあげたあのそらをきみもみているよ"
+  },
+  {
+    title: "マトリョシカ",
+    artist: "ハチ feat. 初音ミク",
+    lyrics: "きょうもはれてるかななみだめをこすった"
+  }
+])
+
+puts "#{Song.count}曲のサンプルデータを作成しました。"
