@@ -137,12 +137,11 @@ export default class extends Controller {
 
   showFeedback(message, type) {
     this.feedbackTarget.textContent = message
-    this.feedbackTarget.className = `feedback ${type}`
-    this.feedbackTarget.style.display = "block"
+    this.feedbackTarget.className = `feedback ${type} show`
   }
 
   hideFeedback() {
-    this.feedbackTarget.style.display = "none"
+    this.feedbackTarget.className = "feedback"
   }
 
   endGame() {
