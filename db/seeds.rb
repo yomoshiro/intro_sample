@@ -9,22 +9,22 @@ Song.create!([
   {
     title: "ロストワンの号哭",
     artist: "Neru feat. 鏡音リン",
-    lyrics: "まにあわせのきみだったひとりよがりのこえだった"
+    lyrics: "はわたりすうせんちのふしんかんが"
   },
   {
     title: "砂の惑星",
     artist: "ハチ feat. 初音ミク",
-    lyrics: "さようならあんちよりもっとうたってほしいんだろう"
+    lyrics: "なんもないすなばとびかうらいめい"
   },
   {
     title: "メルト",
     artist: "ryo feat. 初音ミク",
-    lyrics: "こんなきもちめると"
+    lyrics: "あさめがさめてまっさきにおもいうかぶきみのこと"
   },
   {
     title: "恋愛裁判",
     artist: "40mP feat. 初音ミク",
-    lyrics: "こいするきもちわかりますかおこたえください"
+    lyrics: "Oh! No! No! No! ちょっとまがさしたんだ"
   },
   {
     title: "ワールドイズマイン",
@@ -34,12 +34,12 @@ Song.create!([
   {
     title: "Tell Your World",
     artist: "kz feat. 初音ミク",
-    lyrics: "ひとりきりでみあげたあのそらをきみもみているよ"
+    lyrics: "かたちのないきもちわすれないように"
   },
   {
     title: "マトリョシカ",
     artist: "ハチ feat. 初音ミク",
-    lyrics: "きょうもはれてるかななみだめをこすった"
+    lyrics: "かんがえすぎのめっせーじだれにとどくかもしらないで"
   }
 ])
 
