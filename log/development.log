@@ -1,0 +1,22 @@
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='IntroQuiz'*/[0m
+  [1m[35m (411.1ms)[0m  [1m[35mCREATE DATABASE "intro_quiz_development" ENCODING = 'unicode' /*application='IntroQuiz'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='IntroQuiz'*/[0m
+  [1m[35m (133.1ms)[0m  [1m[35mCREATE DATABASE "intro_quiz_test" ENCODING = 'unicode' /*application='IntroQuiz'*/[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='IntroQuiz'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='IntroQuiz'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7968353490076173600) /*application='IntroQuiz'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='IntroQuiz'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='IntroQuiz'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-12-28 13:17:34.228883', '2025-12-28 13:17:34.228887') RETURNING "key" /*application='IntroQuiz'*/[0m
+Migrating to CreateSongs (20251228131653)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='IntroQuiz'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE "songs" ("id" bigserial primary key, "title" character varying, "lyrics" text, "artist" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='IntroQuiz'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251228131653') RETURNING "version" /*application='IntroQuiz'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='IntroQuiz'*/[0m
+Migrating to CreateGameRecords (20251228131714)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='IntroQuiz'*/[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "game_records" ("id" bigserial primary key, "player_name" character varying, "score" integer, "played_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='IntroQuiz'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20251228131714') RETURNING "version" /*application='IntroQuiz'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*application='IntroQuiz'*/[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(7968353490076173600) /*application='IntroQuiz'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='IntroQuiz'*/[0m

@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player_name: MyString
+  score: 1
+  played_at: 2025-12-28 22:17:14
+
+two:
+  player_name: MyString
+  score: 1
+  played_at: 2025-12-28 22:17:14
