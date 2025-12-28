@@ -93,7 +93,7 @@ export default class extends Controller {
     }
   }
 
-  async submitAnswer(songId, title) {
+  async submitAnswer(selectedSongId, selectedTitle) {
     this.isAnswering = true
     this.stopLyrics()
 
@@ -105,8 +105,8 @@ export default class extends Controller {
           "X-CSRF-Token": document.querySelector("[name='csrf-token']").content
         },
         body: JSON.stringify({
-          song_id: songId,
-          answered_title: title
+          song_id: this.currentSong.id,
+          answered_title: selectedTitle
         })
       })
 
