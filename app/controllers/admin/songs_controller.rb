@@ -5,6 +5,11 @@ class Admin::SongsController < ApplicationController
 
   def index
     @songs = Song.all.order(created_at: :desc)
+
+    if params[:q].present?
+      query = "%#{params[:q]}%"
+      @songs = @songs.where("title LIKE ? OR artist LIKE ? OR lyrics LIKE ?", query, query, query)
+    end
   end
 
   def new

@@ -6,6 +6,16 @@
       <%= link_to "新しい曲を追加", new_admin_song_path, class: "btn btn-primary" %>
     </div>
 
+    <div class="search-section">
+      <%= form_with url: admin_songs_path, method: :get, local: true, class: "search-form" do |f| %>
+        <%= f.text_field :q, value: params[:q], placeholder: "曲名、アーティスト、歌詞で検索...", class: "search-input-admin" %>
+        <%= f.submit "検索", class: "btn btn-secondary btn-small" %>
+        <% if params[:q].present? %>
+          <%= link_to "クリア", admin_songs_path, class: "btn btn-secondary btn-small" %>
+        <% end %>
+      <% end %>
+    </div>
+
     <% if notice %>
       <div class="notice"><%= notice %></div>
     <% end %>
