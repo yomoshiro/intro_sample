@@ -16,6 +16,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :furigana, "曲名（ひらがな）", class: "form-label" %>
+    <%= f.text_field :furigana, class: "form-input", required: true, placeholder: "例: せかいはおわる" %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :artist, "アーティスト", class: "form-label" %>
     <%= f.text_field :artist, class: "form-input", required: true %>
   </div>

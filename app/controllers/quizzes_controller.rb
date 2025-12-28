@@ -39,7 +39,7 @@ class QuizzesController < ApplicationController
     query = params[:q]
 
     if query.present?
-      songs = Song.where("title LIKE ?", "%#{query}%").limit(5)
+      songs = Song.where("LOWER(title) LIKE ? OR LOWER(furigana) LIKE ?", "%#{query.downcase}%", "%#{query.downcase}%").limit(5)
     else
       songs = Song.order("RANDOM()").limit(5)
     end
