@@ -262,6 +262,22 @@ body {
   text-align: center;
 }
 
+.skip-button-wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-skip {
+  background: #6c757d;
+  color: white;
+  padding: 12px 30px;
+  font-size: 1em;
+}
+
+.btn-skip:hover {
+  background: #5a6268;
+}
+
 /* Feedback */
 .feedback {
   padding: 20px;

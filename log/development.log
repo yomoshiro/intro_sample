@@ -666,3 +666,156 @@ Processing by Admin::SongsController#index as TURBO_STREAM
 Completed 200 OK in 80ms (Views: 4.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/" for ::1 at 2025-12-29 00:31:22 +0900
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 10.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 37.5ms | GC: 0.0ms)
+Completed 200 OK in 164ms (Views: 41.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/start" for ::1 at 2025-12-29 00:31:28 +0900
+Processing by HomeController#start as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "player_name" => "テスト", "commit" => "スタート"}
+Redirected to http://localhost:3000/quiz
+Completed 302 Found in 121ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/quiz" for ::1 at 2025-12-29 00:31:28 +0900
+Processing by QuizzesController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering quizzes/index.html.erb within layouts/application
+  Rendered quizzes/index.html.erb within layouts/application (Duration: 0.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
+Completed 200 OK in 112ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/start" for ::1 at 2025-12-29 00:31:29 +0900
+Processing by QuizzesController#start as */*
+  Parameters: {"quiz" => {}}
+  [1m[36mSong Load (77.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 1 /*action='start',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:10:in 'QuizzesController#start'
+Completed 200 OK in 228ms (Views: 0.1ms | ActiveRecord: 107.7ms (1 query, 0 cached) | GC: 2.8ms)
+
+
+Started GET "/quiz/search?q=" for ::1 at 2025-12-29 00:31:30 +0900
+Processing by QuizzesController#search as */*
+  Parameters: {"q" => ""}
+  [1m[36mSong Load (0.9ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 5 /*action='search',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:47:in 'Enumerable#map'
+Completed 200 OK in 148ms (Views: 0.1ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/answer" for ::1 at 2025-12-29 00:31:33 +0900
+Processing by QuizzesController#answer as */*
+  Parameters: {"song_id" => 1, "answered_title" => "ロストワンの号哭", "quiz" => {"song_id" => 1, "answered_title" => "ロストワンの号哭"}}
+  [1m[36mSong Load (0.6ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = 1 LIMIT 1 /*action='answer',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:20:in 'QuizzesController#answer'
+Completed 200 OK in 131ms (Views: 0.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/quiz/search?q=" for ::1 at 2025-12-29 00:31:34 +0900
+Processing by QuizzesController#search as */*
+  Parameters: {"q" => ""}
+  [1m[36mSong Load (0.5ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 5 /*action='search',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:47:in 'Enumerable#map'
+Completed 200 OK in 151ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/start" for ::1 at 2025-12-29 00:31:36 +0900
+Processing by QuizzesController#start as */*
+  Parameters: {"quiz" => {}}
+  [1m[36mSong Load (0.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 1 /*action='start',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:10:in 'QuizzesController#start'
+Completed 200 OK in 119ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/answer" for ::1 at 2025-12-29 00:31:41 +0900
+Processing by QuizzesController#answer as */*
+  Parameters: {"song_id" => 6, "answered_title" => "ワールドイズマイン", "quiz" => {"song_id" => 6, "answered_title" => "ワールドイズマイン"}}
+  [1m[36mSong Load (0.8ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = 6 LIMIT 1 /*action='answer',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:20:in 'QuizzesController#answer'
+Completed 200 OK in 177ms (Views: 0.1ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/start" for ::1 at 2025-12-29 00:31:45 +0900
+Processing by QuizzesController#start as */*
+  Parameters: {"quiz" => {}}
+  [1m[36mSong Load (0.5ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 1 /*action='start',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:10:in 'QuizzesController#start'
+Completed 200 OK in 134ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/quiz/search?q=" for ::1 at 2025-12-29 00:31:47 +0900
+Processing by QuizzesController#search as */*
+  Parameters: {"q" => ""}
+  [1m[36mSong Load (0.6ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 5 /*action='search',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:47:in 'Enumerable#map'
+Completed 200 OK in 118ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/quiz/search?q=%E3%83%9E%E3%83%88%E3%83%AA%E3%83%A7" for ::1 at 2025-12-29 00:31:57 +0900
+Processing by QuizzesController#search as */*
+  Parameters: {"q" => "マトリョ"}
+  [1m[36mSong Load (1.6ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE (title LIKE '%マトリョ%') LIMIT 5 /*action='search',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:47:in 'Enumerable#map'
+Completed 200 OK in 131ms (Views: 0.1ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 3.3ms)
+
+
+Started GET "/quiz/search?q=%E3%83%9E%E3%83%88%E3%83%AA%E3%83%A7%E3%82%B7%E3%82%AB" for ::1 at 2025-12-29 00:31:58 +0900
+Processing by QuizzesController#search as */*
+  Parameters: {"q" => "マトリョシカ"}
+  [1m[36mSong Load (0.5ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE (title LIKE '%マトリョシカ%') LIMIT 5 /*action='search',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:47:in 'Enumerable#map'
+Completed 200 OK in 107ms (Views: 0.2ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/quiz/search?q=%E3%83%9E%E3%83%88%E3%83%AA%E3%83%A7%E3%82%B7%E3%82%AB" for ::1 at 2025-12-29 00:31:58 +0900
+Processing by QuizzesController#search as */*
+  Parameters: {"q" => "マトリョシカ"}
+  [1m[36mSong Load (0.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE (title LIKE '%マトリョシカ%') LIMIT 5 /*action='search',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:47:in 'Enumerable#map'
+Completed 200 OK in 116ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/answer" for ::1 at 2025-12-29 00:32:00 +0900
+Processing by QuizzesController#answer as */*
+  Parameters: {"song_id" => 8, "answered_title" => "マトリョシカ", "quiz" => {"song_id" => 8, "answered_title" => "マトリョシカ"}}
+  [1m[36mSong Load (1.6ms)[0m  [1m[34mSELECT "songs".* FROM "songs" WHERE "songs"."id" = 8 LIMIT 1 /*action='answer',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:20:in 'QuizzesController#answer'
+Completed 200 OK in 250ms (Views: 0.3ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/quiz/start" for ::1 at 2025-12-29 00:32:03 +0900
+Processing by QuizzesController#start as */*
+  Parameters: {"quiz" => {}}
+  [1m[36mSong Load (0.4ms)[0m  [1m[34mSELECT "songs".* FROM "songs" ORDER BY RANDOM() LIMIT 1 /*action='start',application='IntroQuiz',controller='quizzes'*/[0m
+  ↳ app/controllers/quizzes_controller.rb:10:in 'QuizzesController#start'
+Completed 200 OK in 104ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/results" for ::1 at 2025-12-29 00:32:38 +0900
+Processing by GameRecordsController#show as HTML
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='show',application='IntroQuiz',controller='game_records'*/[0m
+  ↳ app/controllers/game_records_controller.rb:14:in 'GameRecordsController#show'
+  [1m[36mGameRecord Create (3.2ms)[0m  [1m[32mINSERT INTO "game_records" ("player_name", "score", "played_at", "created_at", "updated_at") VALUES ('テスト', 2, '2025-12-28 15:32:38.841712', '2025-12-28 15:32:38.842768', '2025-12-28 15:32:38.842768') RETURNING "id" /*action='show',application='IntroQuiz',controller='game_records'*/[0m
+  ↳ app/controllers/game_records_controller.rb:14:in 'GameRecordsController#show'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT /*action='show',application='IntroQuiz',controller='game_records'*/[0m
+  ↳ app/controllers/game_records_controller.rb:14:in 'GameRecordsController#show'
+  Rendering layout layouts/application.html.erb
+  Rendering game_records/show.html.erb within layouts/application
+  Rendered game_records/show.html.erb within layouts/application (Duration: 0.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | GC: 0.0ms)
+Completed 200 OK in 125ms (Views: 1.3ms | ActiveRecord: 4.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2025-12-29 00:33:13 +0900
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 4.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 24.0ms | GC: 0.6ms)
+Completed 200 OK in 166ms (Views: 24.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.6ms)
+
+

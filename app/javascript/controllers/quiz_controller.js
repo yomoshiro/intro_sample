@@ -115,7 +115,10 @@ export default class extends Controller {
       if (data.correct) {
         this.currentScore = data.score
         this.scoreTarget.textContent = this.currentScore
-        this.showFeedback(`正解！「${data.title}」`, "correct")
+        // 正解したら5秒追加
+        this.timeLeft += 5
+        this.timerTarget.textContent = this.timeLeft
+        this.showFeedback(`正解！「${data.title}」 +5秒`, "correct")
       } else {
         this.showFeedback(`不正解... 正解は「${data.title}」`, "incorrect")
       }
@@ -151,5 +154,41 @@ export default class extends Controller {
   // 他のコントローラーから呼び出されるメソッド
   handleAnswer(songId, title) {
     this.submitAnswer(songId, title)
+  }
+
+  // スキップボタン
+  skip() {
+    if (this.isAnswering) return
+
+    this.isAnswering = true
+    this.stopLyrics()
+    this.showFeedback(`スキップ... 正解は「${this.currentSong ? 'データを取得中...' : '不明'}」`, "incorrect")
+
+    // スキップ時は正解を表示するためにAPIを呼ぶ
+    if (this.currentSong) {
+      fetch("/quiz/answer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector("[name='csrf-token']").content
+        },
+        body: JSON.stringify({
+          song_id: this.currentSong.id,
+          answered_title: ""
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.showFeedback(`スキップ... 正解は「${data.title}」`, "incorrect")
+      })
+      .catch(error => console.error("Error:", error))
+    }
+
+    // 3秒後に次の問題へ
+    setTimeout(() => {
+      this.isAnswering = false
+      this.hideFeedback()
+      this.loadNextSong()
+    }, 3000)
   }
 }
