@@ -819,3 +819,63 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 166ms (Views: 24.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.6ms)
 
 
+Started GET "/results" for ::1 at 2025-12-29 00:36:33 +0900
+Processing by GameRecordsController#show as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game_records/show.html.erb within layouts/application
+  Rendered game_records/show.html.erb within layouts/application (Duration: 1.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 19.2ms | GC: 0.1ms)
+Completed 200 OK in 154ms (Views: 22.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/rankings" for ::1 at 2025-12-29 00:38:54 +0900
+Processing by GameRecordsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game_records/index.html.erb within layouts/application
+  [1m[36mGameRecord Load (1.3ms)[0m  [1m[34mSELECT "game_records".* FROM "game_records" ORDER BY "game_records"."score" DESC, "game_records"."played_at" DESC LIMIT 20 /*action='index',application='IntroQuiz',controller='game_records'*/[0m
+  ↳ app/views/game_records/index.html.erb:16:in 'Enumerable#each_with_index'
+  Rendered game_records/index.html.erb within layouts/application (Duration: 15.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | GC: 0.0ms)
+Completed 200 OK in 173ms (Views: 8.0ms | ActiveRecord: 20.2ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/" for ::1 at 2025-12-29 00:38:55 +0900
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 2.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.9ms | GC: 0.0ms)
+Completed 200 OK in 202ms (Views: 7.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rankings" for ::1 at 2025-12-29 00:38:56 +0900
+Processing by GameRecordsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game_records/index.html.erb within layouts/application
+  [1m[36mGameRecord Load (0.8ms)[0m  [1m[34mSELECT "game_records".* FROM "game_records" ORDER BY "game_records"."score" DESC, "game_records"."played_at" DESC LIMIT 20 /*action='index',application='IntroQuiz',controller='game_records'*/[0m
+  ↳ app/views/game_records/index.html.erb:16:in 'Enumerable#each_with_index'
+  Rendered game_records/index.html.erb within layouts/application (Duration: 3.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 135ms (Views: 4.3ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/rankings" for ::1 at 2025-12-29 00:39:24 +0900
+Processing by GameRecordsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering game_records/index.html.erb within layouts/application
+  [1m[36mGameRecord Load (0.4ms)[0m  [1m[34mSELECT "game_records".* FROM "game_records" ORDER BY "game_records"."score" DESC, "game_records"."played_at" DESC LIMIT 20 /*action='index',application='IntroQuiz',controller='game_records'*/[0m
+  ↳ app/views/game_records/index.html.erb:16:in 'Enumerable#each_with_index'
+  Rendered game_records/index.html.erb within layouts/application (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.3ms | GC: 0.0ms)
+Completed 200 OK in 128ms (Views: 3.5ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2025-12-29 00:39:25 +0900
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | GC: 0.0ms)
+Completed 200 OK in 133ms (Views: 1.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
