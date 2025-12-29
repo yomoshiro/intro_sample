@@ -208,13 +208,15 @@ body {
   text-align: center;
 }
 
-/* Search Box */
+/* Answer Section - 横並びレイアウト */
 .answer-section {
-  margin-bottom: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
 
-.search-box {
-  position: relative;
+.search-input-wrapper {
+  flex: 0 0 300px;
 }
 
 .search-input {
@@ -232,18 +234,12 @@ body {
 }
 
 .search-results {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  flex: 1;
   background: white;
-  border: 2px solid #667eea;
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 100;
-  display: none;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .search-result-item {
@@ -251,15 +247,24 @@ body {
   cursor: pointer;
   border-bottom: 1px solid #eee;
   transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  height: 56px;
 }
 
-.search-result-item:hover,
-.search-result-item.selected {
+.search-result-item:not(.empty):hover,
+.search-result-item:not(.empty).selected {
   background-color: #f0f0ff;
 }
 
 .search-result-item:last-child {
   border-bottom: none;
+}
+
+.search-result-item.empty {
+  cursor: default;
+  background: transparent;
 }
 
 .no-results {
@@ -269,8 +274,8 @@ body {
 }
 
 .skip-button-wrapper {
-  margin-top: 20px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .btn-skip {
@@ -517,6 +522,14 @@ tbody tr:hover {
   .quiz-header {
     flex-direction: column;
     gap: 15px;
+  }
+
+  .answer-section {
+    flex-direction: column;
+  }
+
+  .search-input-wrapper {
+    flex: 1;
   }
 
   .lyrics {

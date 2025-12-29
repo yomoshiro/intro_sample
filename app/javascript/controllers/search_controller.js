@@ -6,6 +6,8 @@ export default class extends Controller {
   connect() {
     this.debounceTimer = null
     this.selectedIndex = -1
+    // 初期表示時にランダムな候補を表示
+    this.performSearch("")
   }
 
   focus() {
@@ -16,6 +18,17 @@ export default class extends Controller {
   }
 
   search() {
+    // クイズコントローラーを取得
+    const quizController = this.application.getControllerForElementAndIdentifier(
+      document.querySelector("[data-controller~='quiz']"),
+      "quiz"
+    )
+
+    // 回答中は検索しない
+    if (quizController && quizController.isAnswering) {
+      return
+    }
+
     clearTimeout(this.debounceTimer)
 
     const query = this.inputTarget.value.trim()
@@ -26,42 +39,60 @@ export default class extends Controller {
   }
 
   keydown(event) {
-    const items = this.resultsTarget.querySelectorAll('.search-result-item')
+    // クイズコントローラーを取得
+    const quizController = this.application.getControllerForElementAndIdentifier(
+      document.querySelector("[data-controller~='quiz']"),
+      "quiz"
+    )
 
-    if (items.length === 0) return
+    // 回答中はキー操作無効
+    if (quizController && quizController.isAnswering) {
+      return
+    }
+
+    const allItems = this.resultsTarget.querySelectorAll('.search-result-item')
+    const validItems = this.resultsTarget.querySelectorAll('.search-result-item:not(.empty)')
+
+    if (validItems.length === 0) return
 
     // Tab or 下矢印
     if (event.key === 'Tab' || event.key === 'ArrowDown') {
       event.preventDefault()
-      this.selectedIndex = Math.min(this.selectedIndex + 1, items.length - 1)
-      this.updateSelection(items)
+      this.selectedIndex = Math.min(this.selectedIndex + 1, validItems.length - 1)
+      this.updateSelection(allItems)
     }
     // Shift+Tab or 上矢印
     else if ((event.key === 'Tab' && event.shiftKey) || event.key === 'ArrowUp') {
       event.preventDefault()
       this.selectedIndex = Math.max(this.selectedIndex - 1, 0)
-      this.updateSelection(items)
+      this.updateSelection(allItems)
     }
     // Enter
     else if (event.key === 'Enter') {
       event.preventDefault()
-      if (this.selectedIndex >= 0 && this.selectedIndex < items.length) {
-        items[this.selectedIndex].click()
+      if (this.selectedIndex >= 0 && this.selectedIndex < validItems.length) {
+        validItems[this.selectedIndex].click()
       }
     }
     // Escape
     else if (event.key === 'Escape') {
-      this.resultsTarget.style.display = "none"
+      this.resultsTarget.classList.remove('show')
       this.selectedIndex = -1
     }
   }
 
   updateSelection(items) {
-    items.forEach((item, index) => {
-      if (index === this.selectedIndex) {
-        item.classList.add('selected')
-      } else {
+    let validIndex = 0
+    items.forEach((item) => {
+      if (item.classList.contains('empty')) {
         item.classList.remove('selected')
+      } else {
+        if (validIndex === this.selectedIndex) {
+          item.classList.add('selected')
+        } else {
+          item.classList.remove('selected')
+        }
+        validIndex++
       }
     })
   }
@@ -78,45 +109,58 @@ export default class extends Controller {
   }
 
   displayResults(songs) {
-    if (songs.length === 0) {
-      this.resultsTarget.innerHTML = "<div class='no-results'>候補が見つかりません</div>"
-      this.resultsTarget.style.display = "block"
-      this.selectedIndex = -1
-      return
+    // 常に5行表示（足りない分は空欄）
+    const rows = []
+    for (let i = 0; i < 5; i++) {
+      if (i < songs.length) {
+        rows.push(`
+          <div class="search-result-item" data-action="click->search#selectSong" data-song-id="${songs[i].id}" data-song-title="${songs[i].title}">
+            ${songs[i].title}
+          </div>
+        `)
+      } else {
+        rows.push('<div class="search-result-item empty"></div>')
+      }
     }
 
-    const html = songs.map(song => `
-      <div class="search-result-item" data-action="click->search#selectSong" data-song-id="${song.id}" data-song-title="${song.title}">
-        ${song.title}
-      </div>
-    `).join("")
+    this.resultsTarget.innerHTML = rows.join("")
+    this.resultsTarget.classList.add('show')
 
-    this.resultsTarget.innerHTML = html
-    this.resultsTarget.style.display = "block"
-
-    // 最初の候補を自動選択
-    this.selectedIndex = 0
-    const items = this.resultsTarget.querySelectorAll('.search-result-item')
-    this.updateSelection(items)
+    if (songs.length > 0) {
+      // 最初の候補を自動選択
+      this.selectedIndex = 0
+      this.updateSelection(this.resultsTarget.querySelectorAll('.search-result-item'))
+    } else {
+      this.selectedIndex = -1
+    }
   }
 
   selectSong(event) {
-    const songId = event.currentTarget.dataset.songId
-    const songTitle = event.currentTarget.dataset.songTitle
-
-    // 入力欄をクリア
-    this.inputTarget.value = ""
-    this.resultsTarget.innerHTML = ""
-    this.resultsTarget.style.display = "none"
-
-    // クイズコントローラーに回答を送信
+    // クイズコントローラーを取得
     const quizController = this.application.getControllerForElementAndIdentifier(
       document.querySelector("[data-controller~='quiz']"),
       "quiz"
     )
 
+    // 回答中は何もしない
+    if (quizController && quizController.isAnswering) {
+      return
+    }
+
+    const songId = event.currentTarget.dataset.songId
+    const songTitle = event.currentTarget.dataset.songTitle
+
+    // 入力欄をクリア
+    this.inputTarget.value = ""
+
+    // クイズコントローラーに回答を送信
     if (quizController) {
       quizController.handleAnswer(songId, songTitle)
     }
+
+    // 3秒後に候補を再表示
+    setTimeout(() => {
+      this.performSearch("")
+    }, 3000)
   }
 }
