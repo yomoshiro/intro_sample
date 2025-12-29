@@ -5,6 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.debounceTimer = null
+    this.selectedIndex = -1
   }
 
   focus() {
@@ -24,6 +25,47 @@ export default class extends Controller {
     }, 300)
   }
 
+  keydown(event) {
+    const items = this.resultsTarget.querySelectorAll('.search-result-item')
+
+    if (items.length === 0) return
+
+    // Tab or 下矢印
+    if (event.key === 'Tab' || event.key === 'ArrowDown') {
+      event.preventDefault()
+      this.selectedIndex = Math.min(this.selectedIndex + 1, items.length - 1)
+      this.updateSelection(items)
+    }
+    // Shift+Tab or 上矢印
+    else if ((event.key === 'Tab' && event.shiftKey) || event.key === 'ArrowUp') {
+      event.preventDefault()
+      this.selectedIndex = Math.max(this.selectedIndex - 1, 0)
+      this.updateSelection(items)
+    }
+    // Enter
+    else if (event.key === 'Enter') {
+      event.preventDefault()
+      if (this.selectedIndex >= 0 && this.selectedIndex < items.length) {
+        items[this.selectedIndex].click()
+      }
+    }
+    // Escape
+    else if (event.key === 'Escape') {
+      this.resultsTarget.style.display = "none"
+      this.selectedIndex = -1
+    }
+  }
+
+  updateSelection(items) {
+    items.forEach((item, index) => {
+      if (index === this.selectedIndex) {
+        item.classList.add('selected')
+      } else {
+        item.classList.remove('selected')
+      }
+    })
+  }
+
   async performSearch(query) {
     try {
       const response = await fetch(`/quiz/search?q=${encodeURIComponent(query)}`)
@@ -39,6 +81,7 @@ export default class extends Controller {
     if (songs.length === 0) {
       this.resultsTarget.innerHTML = "<div class='no-results'>候補が見つかりません</div>"
       this.resultsTarget.style.display = "block"
+      this.selectedIndex = -1
       return
     }
 
@@ -50,6 +93,11 @@ export default class extends Controller {
 
     this.resultsTarget.innerHTML = html
     this.resultsTarget.style.display = "block"
+
+    // 最初の候補を自動選択
+    this.selectedIndex = 0
+    const items = this.resultsTarget.querySelectorAll('.search-result-item')
+    this.updateSelection(items)
   }
 
   selectSong(event) {

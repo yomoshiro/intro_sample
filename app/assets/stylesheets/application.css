@@ -253,7 +253,8 @@ body {
   transition: background-color 0.2s;
 }
 
-.search-result-item:hover {
+.search-result-item:hover,
+.search-result-item.selected {
   background-color: #f0f0ff;
 }
 
