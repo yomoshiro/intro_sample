@@ -22,6 +22,11 @@ body {
   margin: 0 auto;
 }
 
+.container-wide {
+  max-width: 100%;
+  padding: 0 20px;
+}
+
 /* Title Screen */
 .title-screen {
   background: white;
@@ -379,6 +384,17 @@ table {
 thead {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+}
+
+thead a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+thead a:hover {
+  opacity: 0.8;
 }
 
 th,

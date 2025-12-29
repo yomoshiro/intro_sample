@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container-wide">
   <div class="admin-screen">
     <h1 class="title">曲管理</h1>
 
@@ -24,8 +24,21 @@
       <table>
         <thead>
           <tr>
-            <th>曲名</th>
-            <th>アーティスト</th>
+            <th>
+              <%= link_to admin_songs_path(sort: 'title', direction: params[:sort] == 'title' && params[:direction] == 'asc' ? 'desc' : 'asc', q: params[:q]) do %>
+                曲名 <%= params[:sort] == 'title' ? (params[:direction] == 'asc' ? '▲' : '▼') : '' %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to admin_songs_path(sort: 'furigana', direction: params[:sort] == 'furigana' && params[:direction] == 'asc' ? 'desc' : 'asc', q: params[:q]) do %>
+                ふりがな <%= params[:sort] == 'furigana' ? (params[:direction] == 'asc' ? '▲' : '▼') : '' %>
+              <% end %>
+            </th>
+            <th>
+              <%= link_to admin_songs_path(sort: 'artist', direction: params[:sort] == 'artist' && params[:direction] == 'asc' ? 'desc' : 'asc', q: params[:q]) do %>
+                アーティスト <%= params[:sort] == 'artist' ? (params[:direction] == 'asc' ? '▲' : '▼') : '' %>
+              <% end %>
+            </th>
             <th>歌詞</th>
             <th>操作</th>
           </tr>
@@ -34,6 +47,7 @@
           <% @songs.each do |song| %>
             <tr>
               <td><%= song.title %></td>
+              <td><%= song.furigana %></td>
               <td><%= song.artist %></td>
               <td class="lyrics-preview"><%= truncate(song.lyrics, length: 50) %></td>
               <td class="actions">
@@ -45,7 +59,7 @@
 
           <% if @songs.empty? %>
             <tr>
-              <td colspan="4" class="no-records">曲がまだ登録されていません</td>
+              <td colspan="5" class="no-records">曲がまだ登録されていません</td>
             </tr>
           <% end %>
         </tbody>
